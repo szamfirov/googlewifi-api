@@ -6,15 +6,14 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="googlewifi", 
     packages=["googlewifi"],
-    version="0.0.18",
+    version="0.0.19",
     license='apache-2.0',
-    author="Tim Empringham",
-    author_email="tim.empringham@live.ca",
+    author="Svetlin Zamfirov",
     description="Google WiFi API wrapper for integration to Google Wifi systems.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/djtimca/googlewifi-api",
-    download_url = 'https://github.com/djtimca/googlewifi-api/archive/v_0.0.18.tar.gz',
+    url="https://github.com/szamfirov/googlewifi-api",
+    download_url = 'https://github.com/szamfirov/googlewifi-api/archive/v_0.0.19.tar.gz',
     keywords = ['Google', 'Wifi'],
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -27,4 +26,7 @@ setuptools.setup(
         'Programming Language :: Python :: 3.6',
     ],
     python_requires='>=3.8',
+    install_requires=[
+        'async_retrying==0.2.2',
+    ],
 )

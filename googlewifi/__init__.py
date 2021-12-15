@@ -4,6 +4,7 @@ import json
 import datetime
 import dateutil.parser
 import grpc
+from async_retrying import retry
 
 from .v1_pb2 import GetHomeGraphRequest
 from .v1_pb2_grpc import StructuresServiceStub
@@ -25,6 +26,7 @@ class GoogleWifi:
     self._systems = None
     self._access_points = {}
 
+  @retry(attempts=3)
   async def post_api(
     self, 
     url:str, 
@@ -41,7 +43,7 @@ class GoogleWifi:
       params=params,
       verify_ssl=False,
       json=json_payload,
-      timeout=15,
+      timeout=30,
     ) as resp:
       try:
         response = await resp.text()
@@ -57,6 +59,7 @@ class GoogleWifi:
 
     return response
 
+  @retry(attempts=3)
   async def get_api(self, url:str, headers:str=None, payload:str=None, params:str=None):
     """Get call to Google APIs."""
     try:
@@ -66,7 +69,7 @@ class GoogleWifi:
         data=payload, 
         params=params,
         verify_ssl=False,
-        timeout=15,
+        timeout=30,
       ) as resp:
         try:
           response = await resp.text()
@@ -83,6 +86,7 @@ class GoogleWifi:
       
     return response
 
+  @retry(attempts=3)
   async def put_api(self, url:str, headers:str=None, payload:str=None, params:str=None):
     """Put call to Google APIs."""
     async with self._session.put(
@@ -91,7 +95,7 @@ class GoogleWifi:
       data=payload,
       params=params,
       verify_ssl=False,
-      timeout=15,
+      timeout=30,
     ) as resp:
       try:
         response = await resp.text()
@@ -106,6 +110,7 @@ class GoogleWifi:
 
       return response
 
+  @retry(attempts=3)
   async def delete_api(self, url:str, headers:str=None, payload:str=None, params:str=None):
     """Delete call to Google APIs."""
     async with self._session.delete(
@@ -114,7 +119,7 @@ class GoogleWifi:
       data=payload,
       params=params,
       verify_ssl=False,
-      timeout=15,
+      timeout=30,
     ) as resp:
       try:
         response = await resp.text()

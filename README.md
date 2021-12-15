@@ -1,4 +1,6 @@
 # googlewifi-api
+> This is a fork from [djtimca/googlewifi-api](https://github.com/djtimca/googlewifi-api)
+
 PyPi Integration for Google WiFi Services for Home Assistant integration. Also provides bluetooth scanning from Google/Nest Home, Mini etc smart speakers to return information about bluetooth devices in the area.
 
 ## Required - Refresh Token
